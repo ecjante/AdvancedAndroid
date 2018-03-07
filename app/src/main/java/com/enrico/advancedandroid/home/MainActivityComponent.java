@@ -1,6 +1,7 @@
 package com.enrico.advancedandroid.home;
 
 import com.enrico.advancedandroid.di.ActivityScope;
+import com.enrico.advancedandroid.ui.NavigationModule;
 
 import dagger.Subcomponent;
 import dagger.android.AndroidInjector;
@@ -11,7 +12,8 @@ import dagger.android.AndroidInjector;
 
 @ActivityScope
 @Subcomponent(modules = {
-        MainScreenBindingModule.class
+        MainScreenBindingModule.class,
+        NavigationModule.class
 })
 public interface MainActivityComponent extends AndroidInjector<MainActivity> {
 

@@ -14,6 +14,7 @@ import com.bluelinelabs.conductor.Router;
 import com.enrico.advancedandroid.R;
 import com.enrico.advancedandroid.di.Injector;
 import com.enrico.advancedandroid.di.ScreenInjector;
+import com.enrico.advancedandroid.ui.ScreenNavigator;
 
 import java.util.UUID;
 
@@ -29,6 +30,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Inject
     ScreenInjector mScreenInjector;
+
+    @Inject
+    ScreenNavigator mScreenNavigator;
 
     private String mInstanceId;
     private Router mRouter;
@@ -49,6 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         mRouter = Conductor.attachRouter(this, screenContainer, savedInstanceState);
+        mScreenNavigator.initWithRouter(mRouter, initialScreen());
         monitorBackStack();
 
         super.onCreate(savedInstanceState);
@@ -57,10 +62,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     @LayoutRes
     protected abstract int layoutRes();
 
+    protected abstract Controller initialScreen();
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(INSTANCE_ID_KEY, mInstanceId);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!mScreenNavigator.pop()) {
+            super.onBackPressed();
+        }
     }
 
     public String getInstanceId() {
@@ -70,6 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mScreenNavigator.clear();
         if (isFinishing()) {
             Injector.clearComponent(this);
         }
