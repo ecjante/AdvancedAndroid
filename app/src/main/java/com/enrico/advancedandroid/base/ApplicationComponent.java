@@ -1,5 +1,8 @@
 package com.enrico.advancedandroid.base;
 
+import com.enrico.advancedandroid.data.RepoServiceModule;
+import com.enrico.advancedandroid.networking.ServiceModule;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -11,7 +14,9 @@ import dagger.Component;
 @Singleton
 @Component(modules = {
         ApplicationModule.class,
-        ActivityBindingModule.class
+        ActivityBindingModule.class,
+        ServiceModule.class,
+        RepoServiceModule.class
 })
 public interface ApplicationComponent {
     void inject(MyApplication myApplication);
