@@ -1,7 +1,9 @@
-package com.enrico.advancedandroid;
+package com.enrico.advancedandroid.home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.enrico.advancedandroid.R;
 
 public class MainActivity extends AppCompatActivity {
 
