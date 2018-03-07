@@ -2,7 +2,7 @@ package com.enrico.advancedandroid.di;
 
 import android.app.Activity;
 
-import com.enrico.advancedandroid.base.BaseActivity;
+import com.bluelinelabs.conductor.Controller;
 
 /**
  * Created by enrico on 3/6/18.
@@ -19,5 +19,13 @@ public class Injector {
 
     public static void clearComponent(Activity activity) {
         ActivityInjector.get(activity).clear(activity);
+    }
+
+    public static void inject(Controller controller) {
+        ScreenInjector.get(controller.getActivity()).inject(controller);
+    }
+
+    public static void clearComponent(Controller controller) {
+        ScreenInjector.get(controller.getActivity()).clear(controller);
     }
 }
