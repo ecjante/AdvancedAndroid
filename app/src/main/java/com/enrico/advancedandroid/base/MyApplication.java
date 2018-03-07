@@ -2,9 +2,12 @@ package com.enrico.advancedandroid.base;
 
 import android.app.Application;
 
+import com.enrico.advancedandroid.BuildConfig;
 import com.enrico.advancedandroid.di.ActivityInjector;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 /**
  * Created by enrico on 3/6/18.
@@ -24,6 +27,10 @@ public class MyApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         mComponent.inject(this);
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
 

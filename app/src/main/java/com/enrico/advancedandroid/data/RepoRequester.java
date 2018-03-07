@@ -22,7 +22,7 @@ public class RepoRequester {
         mService = service;
     }
 
-    Single<List<Repo>> getTrendingRepos() {
+    public Single<List<Repo>> getTrendingRepos() {
         return mService.getTrendingRepos()
                 .map(TrendingReposResponse::repos)
                 .subscribeOn(Schedulers.io());
