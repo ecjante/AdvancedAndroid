@@ -16,7 +16,7 @@ import dagger.android.AndroidInjector;
 public interface MainActivityComponent extends AndroidInjector<MainActivity> {
 
     @Subcomponent.Builder
-    abstract class Builder extends AndroidInjector.Builder<MainActivity> {
+    abstract class Builder extends AndroidInjectorBuilder {
 
     }
 }
