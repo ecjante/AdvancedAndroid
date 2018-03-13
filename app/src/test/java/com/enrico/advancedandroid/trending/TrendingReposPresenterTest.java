@@ -1,6 +1,6 @@
 package com.enrico.advancedandroid.trending;
 
-import com.enrico.advancedandroid.data.RepoRequester;
+import com.enrico.advancedandroid.data.RepoRepository;
 import com.enrico.advancedandroid.data.TrendingReposResponse;
 import com.enrico.advancedandroid.model.Repo;
 import com.enrico.advancedandroid.testutils.TestUtils;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
  */
 public class TrendingReposPresenterTest {
 
-    @Mock RepoRequester repoRequester;
+    @Mock RepoRepository repoRepository;
     @Mock TrendingReposViewModel viewModel;
     @Mock Consumer<Throwable> onErrorConsumer;
     @Mock Consumer<List<Repo>> onSuccessConsumer;
@@ -48,7 +48,7 @@ public class TrendingReposPresenterTest {
         List<Repo> repos = setUpSuccess();
         initializePresenter();
 
-        verify(repoRequester).getTrendingRepos();
+        verify(repoRepository).getTrendingRepos();
         verify(onSuccessConsumer).accept(repos);
         verifyZeroInteractions(onErrorConsumer);
     }
@@ -91,19 +91,19 @@ public class TrendingReposPresenterTest {
         TrendingReposResponse response = TestUtils.loadJson("mock/get_trending_repos.json", TrendingReposResponse.class);
         List<Repo> repos = response.repos();
 
-        when(repoRequester.getTrendingRepos()).thenReturn(Single.just(repos));
+        when(repoRepository.getTrendingRepos()).thenReturn(Single.just(repos));
 
         return repos;
     }
 
     private Throwable setUpError() {
         Throwable error = new IOException();
-        when(repoRequester.getTrendingRepos()).thenReturn(Single.error(error));
+        when(repoRepository.getTrendingRepos()).thenReturn(Single.error(error));
 
         return error;
     }
 
     private void initializePresenter() {
-        presenter = new TrendingReposPresenter(viewModel, repoRequester);
+        presenter = new TrendingReposPresenter(viewModel, repoRepository);
     }
 }
