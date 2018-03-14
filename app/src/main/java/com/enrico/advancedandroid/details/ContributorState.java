@@ -26,6 +26,9 @@ public abstract class ContributorState {
         return new AutoValue_ContributorState.Builder();
     }
 
+    boolean isSuccess() {
+        return errorRes() == null;
+    }
 
     @AutoValue.Builder
     abstract static class Builder {

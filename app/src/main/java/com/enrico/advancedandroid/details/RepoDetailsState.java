@@ -28,6 +28,10 @@ public abstract class RepoDetailsState {
     @Nullable
     abstract Integer errorRes();
 
+    boolean isSuccess() {
+        return errorRes() == null;
+    }
+
     static Builder builder() {
         return new AutoValue_RepoDetailsState.Builder();
     }
