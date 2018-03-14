@@ -4,10 +4,12 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.bluelinelabs.conductor.Controller;
 import com.enrico.advancedandroid.R;
 import com.enrico.advancedandroid.base.TestApplication;
 import com.enrico.advancedandroid.data.TestRepoService;
 import com.enrico.advancedandroid.home.MainActivity;
+import com.enrico.advancedandroid.test.ControllerTest;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,13 +30,7 @@ import static org.hamcrest.CoreMatchers.allOf;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class TrendingReposControllerTest {
-
-    @Inject
-    TestRepoService repoService;
-
-    @Rule
-    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class, true, false);
+public class TrendingReposControllerTest extends ControllerTest {
 
     @Before
     public void setUp() {
@@ -44,7 +40,7 @@ public class TrendingReposControllerTest {
     @Test
     public void loadRepos() {
         repoService.setSendError(false);
-        activityRule.launchActivity(null);
+        launch();
 
         onView(withId(R.id.loading_indicator))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
@@ -60,7 +56,7 @@ public class TrendingReposControllerTest {
     @Test
     public void loadReposError() {
         repoService.setSendError(true);
-        activityRule.launchActivity(null);
+        launch();
 
         onView(withId(R.id.loading_indicator))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
@@ -68,5 +64,10 @@ public class TrendingReposControllerTest {
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
         onView(withId(R.id.tv_error))
                 .check(matches(allOf(withText(R.string.api_error_repos), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))));
+    }
+
+    @Override
+    protected Controller controllerToLaunch() {
+        return new TrendingReposController();
     }
 }

@@ -1,5 +1,7 @@
 package com.enrico.advancedandroid.ui;
 
+import com.enrico.advancedandroid.di.ActivityScope;
+
 import dagger.Binds;
 import dagger.Module;
 
@@ -11,5 +13,6 @@ import dagger.Module;
 public abstract class NavigationModule {
 
     @Binds
+    @ActivityScope
     abstract ScreenNavigator provideScreenNavigator(DefaultScreenNavigator screenNavigator);
 }
