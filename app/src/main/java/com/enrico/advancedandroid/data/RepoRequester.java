@@ -1,5 +1,6 @@
 package com.enrico.advancedandroid.data;
 
+import com.enrico.advancedandroid.model.Contributor;
 import com.enrico.advancedandroid.model.Repo;
 
 import java.util.List;
@@ -22,14 +23,16 @@ public class RepoRequester {
         mService = service;
     }
 
-    public Single<List<Repo>> getTrendingRepos() {
+    Single<List<Repo>> getTrendingRepos() {
         return mService.getTrendingRepos()
-                .map(TrendingReposResponse::repos)
-                .subscribeOn(Schedulers.io());
+                .map(TrendingReposResponse::repos);
     }
 
-    public Single<Repo> getRepo(String repoOwner, String repoName) {
-        return mService.getRepo(repoOwner, repoName)
-                .subscribeOn(Schedulers.io());
+    Single<Repo> getRepo(String repoOwner, String repoName) {
+        return mService.getRepo(repoOwner, repoName);
+    }
+
+    Single<List<Contributor>> getContributors(String url) {
+        return mService.getContributors(url);
     }
 }
