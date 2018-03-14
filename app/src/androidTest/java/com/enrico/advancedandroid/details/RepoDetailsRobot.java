@@ -83,7 +83,7 @@ class RepoDetailsRobot {
         return this;
     }
 
-    RepoDetailsRobot verifyContributorShow(String login) {
+    RepoDetailsRobot verifyContributorShown(String login) {
         onView(allOf(withId(R.id.tv_user_name), withText(login))).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
         return this;
     }

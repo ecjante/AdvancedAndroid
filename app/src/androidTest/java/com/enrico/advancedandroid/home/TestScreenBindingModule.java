@@ -1,6 +1,8 @@
 package com.enrico.advancedandroid.home;
 
 import com.bluelinelabs.conductor.Controller;
+import com.enrico.advancedandroid.details.RepoDetailsComponent;
+import com.enrico.advancedandroid.details.RepoDetailsController;
 import com.enrico.advancedandroid.di.ControllerKey;
 import com.enrico.advancedandroid.trending.TrendingReposComponent;
 import com.enrico.advancedandroid.trending.TrendingReposController;
@@ -15,7 +17,8 @@ import dagger.multibindings.IntoMap;
  */
 
 @Module(subcomponents = {
-        TrendingReposComponent.class
+        TrendingReposComponent.class,
+        RepoDetailsComponent.class
 })
 public abstract class TestScreenBindingModule {
 
@@ -23,4 +26,9 @@ public abstract class TestScreenBindingModule {
     @IntoMap
     @ControllerKey(TrendingReposController.class)
     abstract AndroidInjector.Factory<? extends Controller> bindTrendingReposInjector(TrendingReposComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @ControllerKey(RepoDetailsController.class)
+    abstract AndroidInjector.Factory<? extends Controller> bindRepoDetailsInjector(RepoDetailsComponent.Builder builder);
 }
