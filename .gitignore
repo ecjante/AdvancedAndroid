@@ -12,3 +12,4 @@
 
 /app/src/androidTest/resources/mock
 /app/src/test/resources/mock
+/app/src/debug/assets/mock
