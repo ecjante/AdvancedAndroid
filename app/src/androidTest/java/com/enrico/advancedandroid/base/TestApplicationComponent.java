@@ -5,6 +5,7 @@ import com.enrico.advancedandroid.data.TestRepoService;
 import com.enrico.advancedandroid.data.TestRepoServiceModule;
 import com.enrico.advancedandroid.networking.ServiceModule;
 import com.enrico.advancedandroid.trending.TrendingReposControllerTest;
+import com.enrico.advancedandroid.ui.TestActivityViewInterceptorModule;
 import com.enrico.advancedandroid.ui.TestNavigationModule;
 import com.enrico.advancedandroid.ui.TestScreenNavigator;
 
@@ -22,7 +23,8 @@ import dagger.Component;
         TestActivityBindingModule.class,
         TestRepoServiceModule.class,
         ServiceModule.class,
-        TestNavigationModule.class
+        TestNavigationModule.class,
+        TestActivityViewInterceptorModule.class
 })
 public interface TestApplicationComponent extends ApplicationComponent {
 
