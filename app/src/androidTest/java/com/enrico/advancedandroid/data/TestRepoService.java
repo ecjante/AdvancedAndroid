@@ -1,9 +1,11 @@
 package com.enrico.advancedandroid.data;
 
+import com.enrico.advancedandroid.model.Contributor;
 import com.enrico.advancedandroid.model.Repo;
 import com.enrico.advancedandroid.test.TestUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,6 +38,11 @@ public class TestRepoService implements RepoService {
 
     @Override
     public Single<Repo> getRepo(String repoOwner, String repoName) {
+        return null;
+    }
+
+    @Override
+    public Single<List<Contributor>> getContributors(String url) {
         return null;
     }
 
